@@ -1,0 +1,12 @@
+.profesor-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.profesor-layout__main {
+    margin-left: 240px;
+    flex: 1;
+    padding: 2.5rem;
+    background: var(--color-bg);
+    min-height: 100vh;
+}

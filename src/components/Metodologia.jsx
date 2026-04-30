@@ -11,7 +11,7 @@ const pasos = [
 export default function Metodologia() {
     const ref = useScrollReveal();
     return (
-        <section className="metodologia" id="metodologia">
+        <section className="metodologia reveal" id="metodologia" ref={ref}>
             <div className="metodologia__inner">
                 <p className="metodologia__eyebrow">Cómo trabajo</p>
                 <h2 className="metodologia__title">MI METODOLOGÍA</h2>

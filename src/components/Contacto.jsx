@@ -4,7 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 export default function Contacto() {
     const ref = useScrollReveal();
     return (
-        <section className="contacto" id="contacto">
+        <section className="contacto reveal" id="contacto" ref={ref}>
             <div className="contacto__inner">
                 <p className="contacto__eyebrow">¿Listo para empezar?</p>
                 <h2 className="contacto__title">HABLEMOS</h2>

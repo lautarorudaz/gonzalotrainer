@@ -1,10 +1,10 @@
-import './Hero.css';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import './Hero.css';
 
 export default function Hero() {
     const ref = useScrollReveal();
     return (
-        <section className="hero">
+        <section className="hero reveal" ref={ref}>
             <div className="hero__content">
                 <p className="hero__eyebrow">Entrenamiento personalizado</p>
                 <h1 className="hero__title">

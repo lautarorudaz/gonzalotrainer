@@ -9,6 +9,7 @@ import Ejercicios from "./pages/profesor/Ejercicios";
 import Rutinas from "./pages/profesor/Rutinas";
 import Comentarios from "./pages/profesor/Comentarios";
 import MiRutina from "./pages/alumno/MiRutina";
+import ProfesorLayout from './components/ProfesorLayout';
 
 function App() {
   return (
@@ -19,19 +20,29 @@ function App() {
 
       {/* Profesor */}
       <Route path="/profesor/dashboard" element={
-        <PrivateRoute rolRequerido="profesor"><Dashboard /></PrivateRoute>
+        <PrivateRoute rolRequerido="profesor">
+          <ProfesorLayout><Dashboard /></ProfesorLayout>
+        </PrivateRoute>
       } />
       <Route path="/profesor/alumnos" element={
-        <PrivateRoute rolRequerido="profesor"><Alumnos /></PrivateRoute>
+        <PrivateRoute rolRequerido="profesor">
+          <ProfesorLayout><Alumnos /></ProfesorLayout>
+        </PrivateRoute>
       } />
       <Route path="/profesor/ejercicios" element={
-        <PrivateRoute rolRequerido="profesor"><Ejercicios /></PrivateRoute>
+        <PrivateRoute rolRequerido="profesor">
+          <ProfesorLayout><Ejercicios /></ProfesorLayout>
+        </PrivateRoute>
       } />
       <Route path="/profesor/rutinas" element={
-        <PrivateRoute rolRequerido="profesor"><Rutinas /></PrivateRoute>
+        <PrivateRoute rolRequerido="profesor">
+          <ProfesorLayout><Rutinas /></ProfesorLayout>
+        </PrivateRoute>
       } />
       <Route path="/profesor/comentarios" element={
-        <PrivateRoute rolRequerido="profesor"><Comentarios /></PrivateRoute>
+        <PrivateRoute rolRequerido="profesor">
+          <ProfesorLayout><Comentarios /></ProfesorLayout>
+        </PrivateRoute>
       } />
 
       {/* Alumno */}

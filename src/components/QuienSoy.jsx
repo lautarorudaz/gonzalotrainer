@@ -4,7 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 export default function QuienSoy() {
     const ref = useScrollReveal();
     return (
-        <section className="quien-soy" id="quien-soy">
+        <section className="quien-soy reveal" id="quien-soy" ref={ref}>
             <div className="quien-soy__inner">
                 <div className="quien-soy__image-wrap">
                     <div className="quien-soy__image-placeholder">
