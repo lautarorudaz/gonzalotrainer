@@ -1,0 +1,183 @@
+.alumnos {
+    max-width: 900px;
+}
+
+.alumnos__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.alumnos__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.alumnos__subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.alumnos__btn-nuevo {
+    background: var(--color-dark);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.alumnos__btn-nuevo:hover {
+    background: var(--color-accent-dark);
+    color: var(--color-dark);
+}
+
+.alumnos__loading,
+.alumnos__empty {
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 0.95rem;
+}
+
+.alumnos__empty button {
+    margin-top: 1rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+.alumnos__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.alumno-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.alumno-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.alumno-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-dark);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+}
+
+.alumno-card__info {
+    flex: 1;
+}
+
+.alumno-card__info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.alumno-card__info p {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.alumno-card__tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.alumno-card__tags span {
+    font-size: 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.2rem 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.alumno-card__acciones {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.accion {
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.accion--editar {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.accion--editar:hover {
+    border-color: var(--color-dark);
+}
+
+.accion--rutina {
+    background: var(--color-accent);
+    color: var(--color-dark);
+}
+
+.accion--rutina:hover {
+    background: var(--color-accent-dark);
+}
+
+.accion--del-rutina {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+}
+
+.accion--del-rutina:hover {
+    border-color: #e53e3e;
+    color: #e53e3e;
+}
+
+.accion--eliminar {
+    background: #fff5f5;
+    border-color: #fed7d7;
+    color: #e53e3e;
+}
+
+.accion--eliminar:hover {
+    background: #e53e3e;
+    color: #fff;
+}
