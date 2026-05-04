@@ -1,0 +1,63 @@
+.historial-modal {
+    background: var(--color-surface);
+    border-radius: 20px;
+    width: 95vw;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.historial-modal .modal__header {
+    padding: 1.8rem 2rem 1.4rem;
+}
+
+.historial-modal__alumno {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+}
+
+.historial-modal__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.historial-modal__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+
+.historial-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    gap: 1rem;
+}
+
+.historial-card__info h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.historial-card__info p {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.2rem;
+}
+
+.historial-card__info span {
+    font-size: 0.72rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    color: var(--color-text-muted);
+}

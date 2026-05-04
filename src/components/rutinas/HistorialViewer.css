@@ -1,0 +1,33 @@
+.historial-viewer {
+    background: var(--color-surface);
+    border-radius: 20px;
+    width: 95vw;
+    max-width: 860px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.historial-viewer .modal__header {
+    padding: 1.8rem 2rem 1.4rem;
+}
+
+.historial-viewer__dias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.historial-viewer__dia {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.historial-viewer__ej {
+    margin-bottom: 0.4rem;
+    pointer-events: none;
+}

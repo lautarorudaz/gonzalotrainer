@@ -181,3 +181,22 @@
     background: #e53e3e;
     color: #fff;
 }
+
+.alumno-card__tag-rutina {
+    font-size: 0.75rem;
+    background: var(--color-accent);
+    color: var(--color-dark);
+    border-radius: 100px;
+    padding: 0.2rem 0.7rem;
+    font-weight: 600;
+}
+
+.accion--historial {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.accion--historial:hover {
+    border-color: var(--color-dark);
+}

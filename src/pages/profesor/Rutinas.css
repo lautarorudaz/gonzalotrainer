@@ -1,0 +1,196 @@
+.rutinas {
+    max-width: 1000px;
+}
+
+.rutinas__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.rutinas__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.rutinas__subtitle {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.rutinas__empty {
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.btn-primary {
+    background: var(--color-dark);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.btn-primary:hover {
+    background: var(--color-accent-dark);
+    color: var(--color-dark);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-text);
+}
+
+.btn-ghost:hover {
+    border-color: var(--color-dark);
+}
+
+.btn-ghost--accent {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.btn-ghost--accent:hover {
+    background: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+}
+
+.btn-ghost--danger {
+    color: #e53e3e;
+    border-color: #fed7d7;
+}
+
+.btn-ghost--danger:hover {
+    background: #e53e3e;
+    color: #fff;
+    border-color: #e53e3e;
+}
+
+.rutina-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.rutina-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.rutina-card__nombre {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.rutina-card__meta {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+}
+
+.rutina-card__acciones {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.rutina-card__semanas {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+}
+
+.semana-chip {
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--color-text-muted);
+    transition: all 0.2s;
+}
+
+.semana-chip.active {
+    background: var(--color-dark);
+    color: #fff;
+    border-color: var(--color-dark);
+}
+
+.rutina-card__dias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0;
+}
+
+.dia-preview {
+    border-right: 1px solid var(--color-border);
+    padding: 0.8rem;
+}
+
+.dia-preview:last-child {
+    border-right: none;
+}
+
+.dia-preview__header {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+}
+
+.dia-preview__etapa {
+    margin-bottom: 0.6rem;
+}
+
+.dia-preview__etapa-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.dia-preview__ej {
+    margin-bottom: 0.3rem;
+}
+
+.dia-preview__ej-nombre {
+    font-size: 0.78rem;
+    color: var(--color-text);
+}
+
+.dia-preview__ej-detalle {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}

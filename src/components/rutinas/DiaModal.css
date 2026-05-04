@@ -1,0 +1,290 @@
+.dia-modal {
+    background: var(--color-surface);
+    border-radius: 20px;
+    width: 95vw;
+    max-width: 680px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 300;
+}
+
+.dia-modal__nombre {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.dia-modal__body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dia-modal__etapa {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.dia-modal__etapa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dia-modal__etapa-header h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+}
+
+.dia-modal__add-ej {
+    background: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 100px;
+    padding: 0.3rem 0.8rem;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: all 0.2s;
+}
+
+.dia-modal__add-ej:hover {
+    border-color: var(--color-dark);
+    color: var(--color-text);
+}
+
+.dia-modal__empty {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    padding: 1rem;
+    text-align: center;
+}
+
+.ej-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+}
+
+.ej-row:last-child {
+    border-bottom: none;
+}
+
+.ej-row__select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.ej-row__select label,
+.ej-campo label,
+.ej-row__aclaracion label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+.ej-row__select select,
+.ej-row__aclaracion input {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+}
+
+.ej-row__select select:focus,
+.ej-row__aclaracion input:focus {
+    border-color: var(--color-accent-dark);
+}
+
+.ej-row__campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.ej-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.ej-campo input {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+}
+
+.ej-campo input:focus {
+    border-color: var(--color-accent-dark);
+}
+
+.ej-row__aclaracion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.ej-row__eliminar {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.ej-row__eliminar:hover {
+    color: #e53e3e;
+}
+
+.ej-selector-btn {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+}
+
+.ej-selector-btn:hover {
+    border-color: var(--color-accent-dark);
+}
+
+.ej-selector-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ej-selector-modal {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    width: 360px;
+    max-height: 420px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.ej-selector-modal__header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.ej-selector-modal__etapa {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+    margin-bottom: 0.6rem;
+}
+
+.ej-selector-modal__busqueda {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+}
+
+.ej-selector-modal__busqueda:focus {
+    border-color: var(--color-accent-dark);
+}
+
+.ej-selector-modal__lista {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.ej-selector-modal__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    padding: 2rem;
+}
+
+.ej-selector-modal__item {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    transition: background 0.15s;
+}
+
+.ej-selector-modal__item:last-child {
+    border-bottom: none;
+}
+
+.ej-selector-modal__item:hover {
+    background: var(--color-bg);
+}
+
+.ej-selector-modal__nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.ej-selector-modal__zona {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}

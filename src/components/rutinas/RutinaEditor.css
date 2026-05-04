@@ -1,0 +1,124 @@
+.rutina-editor {
+    background: var(--color-surface);
+    border-radius: 20px;
+    width: 95vw;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.rutina-editor__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background: var(--color-surface);
+    z-index: 10;
+}
+
+.rutina-editor__nombre {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--color-text);
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.rutina-editor__semanas {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+}
+
+.semana-chip--add {
+    border-style: dashed;
+    color: var(--color-text-muted);
+}
+
+.semana-chip--add:hover {
+    border-color: var(--color-dark);
+    color: var(--color-text);
+}
+
+.rutina-editor__dias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.dia-card-editor {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 120px;
+}
+
+.dia-card-editor:hover {
+    border-color: var(--color-dark);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.dia-card-editor__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+}
+
+.dia-card-editor__edit {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.dia-card-editor__etapa {
+    margin-bottom: 0.5rem;
+}
+
+.dia-card-editor__empty {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.dia-card-editor--add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: dashed;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    min-height: 120px;
+}
+
+.dia-card-editor--add:hover {
+    color: var(--color-text);
+}
+
+.rutina-editor__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid var(--color-border);
+    position: sticky;
+    bottom: 0;
+    background: var(--color-surface);
+}
