@@ -1,0 +1,82 @@
+.ej-modal {
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal__form textarea {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+    width: 100%;
+}
+
+.modal__form textarea:focus {
+    border-color: var(--color-accent-dark);
+}
+
+.modal__label-hint {
+    font-weight: 400;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+}
+
+.zona__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.zona__custom {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.zona__custom input {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    background: var(--color-bg);
+    outline: none;
+}
+
+.zona__custom button {
+    padding: 0.5rem 1rem;
+    background: var(--color-dark);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.zona__custom button:hover {
+    background: var(--color-accent-dark);
+    color: var(--color-dark);
+}
+
+.ej-modal__preview {
+    margin-top: 0.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.ej-modal__preview iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+}

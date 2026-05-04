@@ -1,4 +1,4 @@
-import SidebarProfesor from './SidebarProfesor.jsx';
+import SidebarProfesor from './SideBarProfesor.jsx';
 import './ProfesorLayout.css';
 
 export default function ProfesorLayout({ children }) {
