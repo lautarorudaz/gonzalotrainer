@@ -6,12 +6,31 @@ export default function DiaModal({ dia, diaIdx, ejerciciosBanco, onGuardar, onCl
     const [data, setData] = useState(JSON.parse(JSON.stringify(dia)));
     const [selectorAbierto, setSelectorAbierto] = useState(null); // { etapa, idx }
     const [busqueda, setBusqueda] = useState('');
+    const [etapasExpandidas, setEtapasExpandidas] = useState(
+        ETAPAS.reduce((acc, etapa) => ({ ...acc, [etapa]: true }), {})
+    );
+    const [ejerciciosExpandidos, setEjerciciosExpandidos] = useState({});
+
+    const toggleEtapa = (etapa) => {
+        setEtapasExpandidas(prev => ({ ...prev, [etapa]: !prev[etapa] }));
+    };
+
+    const toggleEjercicio = (etapa, idx) => {
+        const key = `${etapa}-${idx}`;
+        setEjerciciosExpandidos(prev => ({ ...prev, [key]: prev[key] === false ? true : false }));
+    };
+
+    const isEjercicioExpandido = (etapa, idx) => {
+        const key = `${etapa}-${idx}`;
+        return ejerciciosExpandidos[key] !== false; // Default is true
+    };
 
     const setNombre = (nombre) => setData(d => ({ ...d, nombre }));
 
     const agregarEjercicio = (etapa) => {
         setData(d => {
             const ejs = [...(d.ejercicios?.[etapa] || []), ejercicioVacio()];
+            setEjerciciosExpandidos(prev => ({ ...prev, [`${etapa}-${ejs.length - 1}`]: true }));
             return { ...d, ejercicios: { ...d.ejercicios, [etapa]: ejs } };
         });
     };
@@ -65,58 +84,84 @@ export default function DiaModal({ dia, diaIdx, ejerciciosBanco, onGuardar, onCl
                 <div className="dia-modal__body">
                     {ETAPAS.map(etapa => (
                         <div className="dia-modal__etapa" key={etapa}>
-                            <div className="dia-modal__etapa-header">
-                                <h3>{etapa}</h3>
-                                <button className="dia-modal__add-ej" onClick={() => agregarEjercicio(etapa)}>
+                            <div className="dia-modal__etapa-header" onClick={() => toggleEtapa(etapa)}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <h3>{etapa}</h3>
+                                    <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+                                        {etapasExpandidas[etapa] ? '▲' : '▼'}
+                                    </span>
+                                </div>
+                                <button 
+                                    className="dia-modal__add-ej" 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        agregarEjercicio(etapa);
+                                        setEtapasExpandidas(prev => ({ ...prev, [etapa]: true }));
+                                    }}
+                                >
                                     + Agregar ejercicio
                                 </button>
                             </div>
 
-                            {(data.ejercicios?.[etapa] || []).length === 0 ? (
-                                <p className="dia-modal__empty">Sin ejercicios en esta etapa.</p>
-                            ) : (
-                                (data.ejercicios?.[etapa] || []).map((ej, ei) => (
-                                    <div className="ej-row" key={ei}>
-
-                                        {/* Selector de ejercicio */}
-                                        <div className="ej-row__select">
-                                            <label>Ejercicio</label>
-                                            <button
-                                                className="ej-selector-btn"
-                                                onClick={() => { setSelectorAbierto({ etapa, idx: ei }); setBusqueda(''); }}
-                                            >
-                                                {ej.nombre || 'Seleccioná un ejercicio...'}
-                                                <span>▾</span>
-                                            </button>
-                                        </div>
-
-                                        <div className="ej-row__campos">
-                                            <div className="ej-campo">
-                                                <label>Series</label>
-                                                <input type="number" value={ej.series} placeholder="3"
-                                                    onChange={e => updateEjercicio(etapa, ei, 'series', e.target.value)} />
+                            {etapasExpandidas[etapa] && (
+                                (data.ejercicios?.[etapa] || []).length === 0 ? (
+                                    <p className="dia-modal__empty">Sin ejercicios en esta etapa.</p>
+                                ) : (
+                                    (data.ejercicios?.[etapa] || []).map((ej, ei) => (
+                                        <div className="ej-row" key={ei}>
+                                            <div className="ej-row__header" style={{ marginBottom: isEjercicioExpandido(etapa, ei) ? '1rem' : '0' }}>
+                                                <div className="ej-row__toggle" onClick={() => toggleEjercicio(etapa, ei)}>
+                                                    <span className="ej-row__toggle-icon">
+                                                        {isEjercicioExpandido(etapa, ei) ? '▼' : '▶'}
+                                                    </span>
+                                                    <span className="ej-row__title">
+                                                        {ej.nombre || 'Nuevo ejercicio...'}
+                                                    </span>
+                                                </div>
+                                                <button className="ej-row__eliminar" onClick={() => eliminarEjercicio(etapa, ei)}>✕</button>
                                             </div>
-                                            <div className="ej-campo">
-                                                <label>Reps</label>
-                                                <input type="number" value={ej.repeticiones} placeholder="12"
-                                                    onChange={e => updateEjercicio(etapa, ei, 'repeticiones', e.target.value)} />
-                                            </div>
-                                            <div className="ej-campo">
-                                                <label>Peso (kg)</label>
-                                                <input type="number" value={ej.peso} placeholder="0"
-                                                    onChange={e => updateEjercicio(etapa, ei, 'peso', e.target.value)} />
-                                            </div>
-                                        </div>
 
-                                        <div className="ej-row__aclaracion">
-                                            <label>Aclaración</label>
-                                            <input type="text" value={ej.aclaracion} placeholder="Ej: mantené la espalda recta..."
-                                                onChange={e => updateEjercicio(etapa, ei, 'aclaracion', e.target.value)} />
-                                        </div>
+                                            {isEjercicioExpandido(etapa, ei) && (
+                                                <>
+                                                    <div className="ej-row__select">
+                                                        <label>Ejercicio</label>
+                                                        <button
+                                                            className="ej-selector-btn"
+                                                            onClick={() => { setSelectorAbierto({ etapa, idx: ei }); setBusqueda(''); }}
+                                                        >
+                                                            {ej.nombre || 'Seleccioná un ejercicio...'}
+                                                            <span>▾</span>
+                                                        </button>
+                                                    </div>
 
-                                        <button className="ej-row__eliminar" onClick={() => eliminarEjercicio(etapa, ei)}>✕</button>
-                                    </div>
-                                ))
+                                                    <div className="ej-row__campos">
+                                                        <div className="ej-campo">
+                                                            <label>Series</label>
+                                                            <input type="number" value={ej.series} placeholder="3"
+                                                                onChange={e => updateEjercicio(etapa, ei, 'series', e.target.value)} />
+                                                        </div>
+                                                        <div className="ej-campo">
+                                                            <label>Reps</label>
+                                                            <input type="number" value={ej.repeticiones} placeholder="12"
+                                                                onChange={e => updateEjercicio(etapa, ei, 'repeticiones', e.target.value)} />
+                                                        </div>
+                                                        <div className="ej-campo">
+                                                            <label>Peso (kg)</label>
+                                                            <input type="number" value={ej.peso} placeholder="0"
+                                                                onChange={e => updateEjercicio(etapa, ei, 'peso', e.target.value)} />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="ej-row__aclaracion">
+                                                        <label>Aclaración</label>
+                                                        <input type="text" value={ej.aclaracion} placeholder="Ej: mantené la espalda recta..."
+                                                            onChange={e => updateEjercicio(etapa, ei, 'aclaracion', e.target.value)} />
+                                                    </div>
+                                                </>
+                                            )}
+                                        </div>
+                                    ))
+                                )
                             )}
                         </div>
                     ))}

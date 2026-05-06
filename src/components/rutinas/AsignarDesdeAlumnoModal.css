@@ -12,6 +12,11 @@
     margin-top: 0.2rem;
 }
 
+.asignar-tipo-modal .modal__header {
+    padding: 1.5rem 1.5rem 0;
+    margin-bottom: 0;
+}
+
 .asignar-tipo-modal__opciones {
     display: flex;
     flex-direction: column;

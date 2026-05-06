@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./router/PrivateRoute";
-
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Dashboard from "./pages/profesor/Dashboard";
@@ -10,6 +9,7 @@ import Rutinas from "./pages/profesor/Rutinas";
 import Comentarios from "./pages/profesor/Comentarios";
 import MiRutina from "./pages/alumno/MiRutina";
 import ProfesorLayout from './components/ProfesorLayout';
+
 
 function App() {
   return (
@@ -47,7 +47,9 @@ function App() {
 
       {/* Alumno */}
       <Route path="/alumno/mi-rutina" element={
-        <PrivateRoute rolRequerido="alumno"><MiRutina /></PrivateRoute>
+        <PrivateRoute rolRequerido="alumno">
+          <MiRutina />
+        </PrivateRoute>
       } />
     </Routes>
   );
