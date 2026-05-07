@@ -1,0 +1,334 @@
+.dashboard {
+    max-width: 960px;
+}
+
+.dashboard__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    color: var(--color-text-muted);
+}
+
+.dashboard__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Stats */
+.dashboard__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dash-stat {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: box-shadow 0.2s;
+}
+
+.dash-stat:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.dash-stat--warn {
+    border-color: #fed7d7;
+    background: #fff5f5;
+}
+
+.dash-stat--accent {
+    border-color: var(--color-accent);
+    background: #f9ffe6;
+}
+
+.dash-stat__num {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--color-text);
+}
+
+.dash-stat__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-muted);
+}
+
+/* Grid */
+.dashboard__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* Panel */
+.dash-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.dash-panel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dash-panel__header h2 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+}
+
+.dash-panel__link {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.dash-panel__link:hover {
+    color: var(--color-text);
+}
+
+.dash-panel__empty {
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+}
+
+.dash-panel__ok {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+}
+
+.dash-panel__ok span {
+    font-size: 1.5rem;
+    color: var(--color-accent-dark);
+}
+
+/* Comentarios */
+.dash-comentarios {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-comentario {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    transition: opacity 0.3s;
+}
+
+.dash-comentario:last-child {
+    border-bottom: none;
+}
+
+.dash-comentario--leido {
+    opacity: 0.45;
+}
+
+.dash-comentario__avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-dark);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dash-comentario__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.dash-comentario__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+.dash-comentario__nombre {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.dash-comentario__fecha {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}
+
+.dash-comentario__texto {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.2rem;
+}
+
+.dash-comentario__tipo {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}
+
+.dash-comentario__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent-dark);
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+/* Sin rutina */
+.dash-sinrutina {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-sinrutina__item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dash-sinrutina__item:last-child {
+    border-bottom: none;
+}
+
+.dash-sinrutina__avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dash-sinrutina__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-sinrutina__info span:first-child {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.dash-sinrutina__info span:last-child {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Estado general */
+.dash-alumnos {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-alumno-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dash-alumno-row:last-child {
+    border-bottom: none;
+}
+
+.dash-alumno-row__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-dark);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.dash-alumno-row__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-alumno-row__nombre {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.dash-alumno-row__modalidad {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.dash-alumno-row__rutina {
+    flex-shrink: 0;
+}
+
+.dash-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    border-radius: 100px;
+}
+
+.dash-tag--activa {
+    background: var(--color-accent);
+    color: var(--color-dark);
+}
+
+.dash-tag--sin {
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    color: #e53e3e;
+}

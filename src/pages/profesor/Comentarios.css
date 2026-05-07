@@ -1,0 +1,310 @@
+.comentarios {
+    max-width: 860px;
+}
+
+.comentarios__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.comentarios__title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+}
+
+.comentarios__tabs {
+    display: flex;
+    gap: 0.3rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.3rem;
+}
+
+.comentarios__tab {
+    padding: 0.45rem 1.2rem;
+    border-radius: 100px;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.comentarios__tab.active {
+    background: var(--color-dark);
+    color: #fff;
+}
+
+.comentarios__badge {
+    background: var(--color-accent);
+    color: var(--color-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.1rem 0.5rem;
+    border-radius: 100px;
+}
+
+/* Filtros */
+.comentarios__filtros {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+.filtro-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.filtro-field label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+}
+
+.filtro-field select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    background: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.filtro-field select:focus {
+    border-color: var(--color-accent-dark);
+}
+
+/* Stats */
+.comentarios__stats {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.8rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.stat-card--accent {
+    border-color: var(--color-accent);
+    background: #f9ffe6;
+}
+
+.stat-card__num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--color-text);
+}
+
+.stat-card__label {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+}
+
+.comentarios__limpiar {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    margin-left: auto;
+    transition: all 0.2s;
+}
+
+.comentarios__limpiar:hover {
+    border-color: #e53e3e;
+    color: #e53e3e;
+}
+
+.comentarios__empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+/* Lista comentarios */
+.comentarios__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.comentario-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: opacity 0.3s;
+}
+
+.comentario-card--leido {
+    opacity: 0.45;
+}
+
+.comentario-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-dark);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.comentario-card__body {
+    flex: 1;
+}
+
+.comentario-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.comentario-card__alumno {
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.comentario-card__fecha {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.comentario-card__ubicacion {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.comentario-card__texto {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.comentario-card__acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+/* Progreso */
+.progreso-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.progreso-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.progreso-card__body {
+    flex: 1;
+}
+
+.progreso-card__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+.progreso-card__alumno {
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.progreso-card__fecha {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.progreso-card__ubicacion {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.progreso-card__ejercicio {
+    margin-bottom: 0.4rem;
+}
+
+.progreso-card__ej-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    padding: 0.2rem 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.progreso-card__texto {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}

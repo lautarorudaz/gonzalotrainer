@@ -9,8 +9,12 @@ const ETAPAS = ['Movilidad', 'Activación', 'Central'];
 
 function getYoutubeEmbed(url) {
     if (!url) return null;
-    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
-    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+    const match = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/
+    );
+    if (!match) return null;
+    const id = match[1];
+    return `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
 }
 
 export default function MiRutina() {
@@ -28,17 +32,50 @@ export default function MiRutina() {
     const [ejAbierto, setEjAbierto] = useState(null);
 
     useEffect(() => {
+
         const fetchData = async () => {
             const alumnoDoc = await getDoc(doc(db, 'usuarios', user.uid));
             setAlumno(alumnoDoc.data());
 
             const rutinaSnap = await getDocs(collection(db, 'usuarios', user.uid, 'rutinaActiva'));
             if (!rutinaSnap.empty) {
-                setRutina({ id: rutinaSnap.docs[0].id, ...rutinaSnap.docs[0].data() });
+                const rutinaData = { id: rutinaSnap.docs[0].id, ...rutinaSnap.docs[0].data() };
+
+                // Traer todos los ejercicios del banco
+                const ejSnap = await getDocs(collection(db, 'ejercicios'));
+                const bancoPorId = {};
+                ejSnap.docs.forEach(d => { bancoPorId[d.id] = d.data(); });
+
+                console.log('Banco:', bancoPorId);
+                console.log('Ejercicios rutina:', rutinaData.semanas?.[0]?.dias?.[0]?.ejercicios);
+                console.log('Aq5 tiene videoUrl:', bancoPorId['Aq5FgMHscOGFlpk0AJoq']?.videoUrl);
+
+                // Cruzar videoUrl desde el banco a cada ejercicio de la rutina
+                const rutinaCruzada = {
+                    ...rutinaData,
+                    semanas: rutinaData.semanas?.map(semana => ({
+                        ...semana,
+                        dias: semana.dias?.map(dia => ({
+                            ...dia,
+                            ejercicios: Object.fromEntries(
+                                Object.entries(dia.ejercicios || {}).map(([etapa, ejs]) => [
+                                    etapa,
+                                    ejs.map(ej => ({
+                                        ...ej,
+                                        videoUrl: bancoPorId[ej.ejercicioId]?.videoUrl || ej.videoUrl || '',
+                                    }))
+                                ])
+                            )
+                        }))
+                    }))
+                };
+
+                setRutina(rutinaCruzada);
             }
             setLoading(false);
         };
         fetchData();
+
     }, [user]);
 
     useEffect(() => {
