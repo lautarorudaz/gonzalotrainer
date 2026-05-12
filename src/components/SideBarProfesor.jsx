@@ -11,7 +11,7 @@ const links = [
     { to: '/profesor/comentarios', label: 'Comentarios', icon: '◻' },
 ];
 
-export default function SidebarProfesor() {
+export default function SidebarProfesor({ isOpen, onClose }) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -19,14 +19,20 @@ export default function SidebarProfesor() {
         navigate('/');
     };
 
+    const handleNavClick = () => {
+        // Close sidebar on mobile after navigation
+        if (onClose) onClose();
+    };
+
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>
             <div className="sidebar__brand">TRAINER<span>.</span></div>
             <nav className="sidebar__nav">
                 {links.map((link) => (
                     <NavLink
                         key={link.to}
                         to={link.to}
+                        onClick={handleNavClick}
                         className={({ isActive }) =>
                             `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
                         }

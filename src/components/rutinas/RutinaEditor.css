@@ -122,3 +122,55 @@
     bottom: 0;
     background: var(--color-surface);
 }
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    /* Full-screen modal */
+    .rutina-editor-overlay {
+        align-items: flex-end;
+        padding: 0 8px 8px;
+    }
+
+    .rutina-editor {
+        width: 100%;
+        max-width: 100%;
+        max-height: 96dvh;
+        border-radius: 20px;
+    }
+
+    .rutina-editor__nombre {
+        font-size: 1.3rem;
+    }
+
+    .rutina-editor__dias {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+        padding: 1rem;
+    }
+
+    .dia-card-editor {
+        min-height: 90px;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .rutina-editor__dias {
+        grid-template-columns: 1fr;
+    }
+
+    .rutina-editor__footer {
+        flex-direction: column-reverse;
+        padding: 0.8rem 1rem;
+    }
+
+    .rutina-editor__footer .modal__btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.85rem 1rem;
+    }
+}

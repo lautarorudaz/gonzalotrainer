@@ -68,7 +68,7 @@ export default function RutinaEditor({ rutina, coleccion, alumnoId, onClose, onG
     const semana = data.semanas?.[semanaIdx];
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-overlay rutina-editor-overlay" onClick={onClose}>
             <div className="rutina-editor" onClick={e => e.stopPropagation()}>
                 <div className="rutina-editor__header">
                     <input

@@ -370,3 +370,76 @@
     border-top: 1px solid var(--color-border);
     margin: 0;
 }
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 860px — stack layout
+────────────────────────────────────────── */
+@media (max-width: 860px) {
+    .ejercicios__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ejercicios__filtros {
+        position: static;
+        order: -1;
+    }
+
+    /* Mostrar filtros como row scrollable de chips */
+    .filtro__seccion-header {
+        display: none;
+    }
+
+    .ejercicios__filtros > h3:first-child {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .ejercicios__title {
+        font-size: 1.8rem;
+    }
+
+    .ejercicios__header {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .ejercicios__btn-nuevo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .ejercicios__grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.8rem;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .ejercicios__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+    }
+
+    .ejercicio-card__body {
+        padding: 0.7rem;
+    }
+
+    .ejercicio-card__nombre {
+        font-size: 0.85rem;
+    }
+
+    .video-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .video-modal {
+        border-radius: var(--radius) var(--radius) 0 0;
+        max-width: 100%;
+    }
+}

@@ -315,3 +315,84 @@
     font-size: 0.75rem;
     color: var(--color-text-muted);
 }
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px — full-screen modal
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .dia-modal {
+        width: 100%;
+        max-width: 100%;
+        max-height: 96dvh;
+        border-radius: 20px;
+    }
+
+    /* The overlay becomes bottom-aligned */
+    .dia-modal-overlay {
+        align-items: flex-end;
+        padding: 0 8px 8px;
+    }
+
+    .dia-modal__nombre {
+        font-size: 1.2rem;
+    }
+
+    .dia-modal__body {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .ej-row__campos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Selector modal also full-width */
+    .ej-selector-modal {
+        width: 95vw;
+        max-height: 70dvh;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .dia-modal__etapa-header {
+        padding: 1rem 0.8rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .dia-modal__add-ej {
+        font-size: 0.75rem;
+    }
+
+    .ej-row {
+        padding: 0.8rem;
+    }
+
+    .ej-row__campos {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .modal__actions {
+        flex-direction: column-reverse;
+        padding: 0.8rem 1rem !important;
+    }
+
+    .modal__actions .modal__btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.85rem 1rem;
+    }
+
+    .ej-selector-overlay {
+        align-items: flex-end;
+    }
+
+    .ej-selector-modal {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        max-height: 80dvh;
+    }
+}

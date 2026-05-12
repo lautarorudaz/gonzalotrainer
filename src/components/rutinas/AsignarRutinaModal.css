@@ -70,3 +70,15 @@
     font-size: 0.78rem;
     color: var(--color-text-muted);
 }
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 600px
+────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .asignar-modal {
+        width: 100%;
+        max-width: 100%;
+        max-height: 92dvh;
+        border-radius: 20px;
+    }
+}

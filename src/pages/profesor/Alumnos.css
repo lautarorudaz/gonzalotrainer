@@ -31,6 +31,7 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: background 0.2s ease;
+    white-space: nowrap;
 }
 
 .alumnos__btn-nuevo:hover {
@@ -94,18 +95,25 @@
 
 .alumno-card__info {
     flex: 1;
+    min-width: 0;
 }
 
 .alumno-card__info h3 {
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .alumno-card__info p {
     font-size: 0.82rem;
     color: var(--color-text-muted);
     margin-bottom: 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .alumno-card__tags {
@@ -128,6 +136,7 @@
     gap: 0.5rem;
     flex-wrap: wrap;
     justify-content: flex-end;
+    flex-shrink: 0;
 }
 
 .accion {
@@ -199,4 +208,52 @@
 
 .accion--historial:hover {
     border-color: var(--color-dark);
+}
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .alumnos__title {
+        font-size: 1.8rem;
+    }
+
+    .alumnos__header {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .alumnos__btn-nuevo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .alumno-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .alumno-card__acciones {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .alumno-card__acciones {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .accion {
+        text-align: center;
+        font-size: 0.75rem;
+        padding: 0.45rem 0.5rem;
+    }
 }

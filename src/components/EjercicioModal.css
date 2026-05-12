@@ -80,3 +80,14 @@
     border: none;
     display: block;
 }
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 600px
+────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .ej-modal {
+        max-width: 100%;
+        max-height: 96dvh;
+        border-radius: 20px;
+    }
+}

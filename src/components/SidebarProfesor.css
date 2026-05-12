@@ -8,6 +8,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 200;
 }
 
 .sidebar__brand {
@@ -72,4 +73,19 @@
 .sidebar__logout:hover {
     border-color: rgba(255, 255, 255, 0.4);
     color: #fff;
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 900px  — slide in/out
+────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .sidebar--open {
+        transform: translateX(0);
+    }
 }

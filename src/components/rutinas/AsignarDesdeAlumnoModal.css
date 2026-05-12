@@ -104,3 +104,18 @@
     font-size: 0.78rem;
     color: var(--color-text-muted);
 }
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 600px
+────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .asignar-tipo-modal {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 20px;
+    }
+
+    .asignar-generica-lista {
+        max-height: 55dvh;
+    }
+}

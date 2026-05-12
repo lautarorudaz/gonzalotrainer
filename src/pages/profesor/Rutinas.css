@@ -124,6 +124,7 @@
     padding: 0.8rem 1.5rem;
     border-bottom: 1px solid var(--color-border);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .semana-chip {
@@ -193,4 +194,67 @@
 .dia-preview__ej-detalle {
     font-size: 0.72rem;
     color: var(--color-text-muted);
+}
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .rutinas__title {
+        font-size: 1.8rem;
+    }
+
+    .rutinas__header {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .rutinas__header .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .rutina-card__header {
+        padding: 1rem 1.2rem;
+    }
+
+    .rutina-card__acciones {
+        width: 100%;
+    }
+
+    .rutina-card__acciones .btn-ghost {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .rutina-card__dias {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .rutinas__title {
+        font-size: 1.6rem;
+    }
+
+    .rutina-card__dias {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dia-preview {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .dia-preview:nth-child(odd) {
+        border-right: 1px solid var(--color-border);
+    }
+
+    .dia-preview:nth-child(even) {
+        border-right: none;
+    }
 }

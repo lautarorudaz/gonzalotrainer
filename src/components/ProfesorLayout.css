@@ -10,3 +10,87 @@
     background: var(--color-bg);
     min-height: 100vh;
 }
+
+/* Mobile topbar (hamburger) — hidden on desktop */
+.profesor-topbar {
+    display: none;
+}
+
+/* Overlay for mobile sidebar */
+.sidebar-overlay {
+    display: none;
+}
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 900px
+────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .profesor-layout__main {
+        margin-left: 0;
+        padding: 1rem 1.2rem 2rem;
+    }
+
+    /* Show the top bar */
+    .profesor-topbar {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.8rem 0;
+        margin-bottom: 1.2rem;
+    }
+
+    .profesor-topbar__menu {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 4px;
+    }
+
+    .profesor-topbar__menu span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--color-text);
+        border-radius: 2px;
+        transition: all 0.2s;
+    }
+
+    .profesor-topbar__brand {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        color: var(--color-text);
+    }
+
+    .profesor-topbar__brand span {
+        color: var(--color-accent);
+    }
+
+    /* Overlay */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 199;
+        backdrop-filter: blur(2px);
+        animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .profesor-layout__main {
+        padding: 0.8rem 0.9rem 4rem;
+    }
+}

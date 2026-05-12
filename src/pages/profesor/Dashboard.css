@@ -332,3 +332,57 @@
     border: 1px solid #fed7d7;
     color: #e53e3e;
 }
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .dashboard__title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+    }
+
+    .dash-stat {
+        padding: 1rem 1rem;
+    }
+
+    .dash-stat__num {
+        font-size: 2rem;
+    }
+
+    .dashboard__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .dashboard__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+
+    .dash-stat__num {
+        font-size: 1.8rem;
+    }
+
+    .dash-stat__label {
+        font-size: 0.7rem;
+    }
+
+    .dash-alumno-row {
+        padding: 0.7rem 1rem;
+    }
+
+    .dash-comentario {
+        padding: 0.7rem 1rem;
+    }
+}

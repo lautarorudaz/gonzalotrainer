@@ -69,7 +69,7 @@ export default function DiaModal({ dia, diaIdx, ejerciciosBanco, onGuardar, onCl
     };
 
     return (
-        <div className="modal-overlay" style={{ zIndex: 300 }} onClick={onClose}>
+        <div className="modal-overlay dia-modal-overlay" style={{ zIndex: 300 }} onClick={onClose}>
             <div className="dia-modal" onClick={e => e.stopPropagation()}>
                 <div className="modal__header" style={{ padding: '1.5rem', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <input

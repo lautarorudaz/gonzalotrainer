@@ -202,6 +202,7 @@
 
 .comentario-card__body {
     flex: 1;
+    min-width: 0;
 }
 
 .comentario-card__meta {
@@ -209,6 +210,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.2rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
 }
 
 .comentario-card__alumno {
@@ -266,12 +269,15 @@
 
 .progreso-card__body {
     flex: 1;
+    min-width: 0;
 }
 
 .progreso-card__meta {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.2rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
 }
 
 .progreso-card__alumno {
@@ -307,4 +313,76 @@
 .progreso-card__texto {
     font-size: 0.9rem;
     line-height: 1.5;
+}
+
+/* ──────────────────────────────────────────
+   TABLET  ≤ 700px
+────────────────────────────────────────── */
+@media (max-width: 700px) {
+    .comentarios__title {
+        font-size: 1.8rem;
+    }
+
+    .comentarios__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comentarios__tabs {
+        width: 100%;
+    }
+
+    .comentarios__tab {
+        flex: 1;
+        justify-content: center;
+        padding: 0.45rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .comentarios__filtros {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .filtro-field {
+        width: 100%;
+    }
+
+    .filtro-field select {
+        width: 100%;
+    }
+
+    .comentarios__limpiar {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ──────────────────────────────────────────
+   MOBILE  ≤ 480px
+────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .comentario-card {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .comentario-card__acciones {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .comentarios__stats {
+        gap: 0.6rem;
+    }
+
+    .stat-card {
+        flex: 1;
+        padding: 0.6rem 0.5rem;
+    }
+
+    .stat-card__num {
+        font-size: 1.4rem;
+    }
 }
