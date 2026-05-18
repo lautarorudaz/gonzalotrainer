@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import AlumnoModal from '../../components/AlumnoModal';
 import AsignarDesdeAlumnoModal from '../../components/rutinas/AsignarDesdeAlumnoModal';
 import HistorialModal from '../../components/rutinas/HistorialModal';
+import CompartirModal from '../../components/CompartirModal';
 import './Alumnos.css';
 
 export default function Alumnos() {
@@ -13,6 +14,7 @@ export default function Alumnos() {
     const [alumnoEditando, setAlumnoEditando] = useState(null);
     const [asignarAlumno, setAsignarAlumno] = useState(null);
     const [historialAlumno, setHistorialAlumno] = useState(null);
+    const [compartirAlumno, setCompartirAlumno] = useState(null);
     const [rutinasActivas, setRutinasActivas] = useState({});
 
     const fetchAlumnos = async () => {
@@ -124,6 +126,10 @@ export default function Alumnos() {
                                                 onClick={() => setAsignarAlumno({ alumno, modo: 'editar', rutina: rutinasActivas[alumno.id] })}>
                                                 Editar rutina
                                             </button>
+                                            <button className="accion accion--compartir"
+                                                onClick={() => setCompartirAlumno(alumno)}>
+                                                Compartir
+                                            </button>
                                             <button className="accion accion--del-rutina"
                                                 onClick={() => handleEliminarRutina(alumno)}>
                                                 Eliminar rutina
@@ -167,6 +173,13 @@ export default function Alumnos() {
                 <HistorialModal
                     alumno={historialAlumno}
                     onClose={() => setHistorialAlumno(null)}
+                />
+            )}
+
+            {compartirAlumno && (
+                <CompartirModal
+                    alumno={compartirAlumno}
+                    onClose={() => setCompartirAlumno(null)}
                 />
             )}
         </div>
