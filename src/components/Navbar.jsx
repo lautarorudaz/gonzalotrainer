@@ -10,7 +10,7 @@ function smoothScrollTo(id) {
 export default function Navbar() {
     return (
         <header className="navbar">
-            <div className="navbar__brand">TRAINER<span>.</span></div>
+            <img src="/logo-light-bg.png" alt="Force Training" className="navbar__brand-img" />
             <nav className="navbar__links">
                 <button className="navbar__link-btn" onClick={() => smoothScrollTo('metodologia')}>
                     Metodología

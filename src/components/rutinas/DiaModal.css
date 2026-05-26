@@ -34,6 +34,37 @@
     overflow: hidden;
 }
 
+/* ── Colores por etapa ── */
+.dia-modal__etapa--movilidad {
+    border-left: 3px solid #60a5fa;
+}
+.dia-modal__etapa--movilidad .dia-modal__etapa-header {
+    background: rgba(96, 165, 250, 0.06);
+}
+.dia-modal__etapa--movilidad .dia-modal__etapa-header h3 {
+    color: #3b82f6;
+}
+
+.dia-modal__etapa--activacion {
+    border-left: 3px solid #fb923c;
+}
+.dia-modal__etapa--activacion .dia-modal__etapa-header {
+    background: rgba(251, 146, 60, 0.06);
+}
+.dia-modal__etapa--activacion .dia-modal__etapa-header h3 {
+    color: #ea7616;
+}
+
+.dia-modal__etapa--central {
+    border-left: 3px solid #a78bfa;
+}
+.dia-modal__etapa--central .dia-modal__etapa-header {
+    background: rgba(167, 139, 250, 0.06);
+}
+.dia-modal__etapa--central .dia-modal__etapa-header h3 {
+    color: #8b5cf6;
+}
+
 .dia-modal__etapa-header {
     display: flex;
     justify-content: space-between;

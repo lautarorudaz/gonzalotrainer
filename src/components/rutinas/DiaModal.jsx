@@ -83,7 +83,7 @@ export default function DiaModal({ dia, diaIdx, ejerciciosBanco, onGuardar, onCl
 
                 <div className="dia-modal__body">
                     {ETAPAS.map(etapa => (
-                        <div className="dia-modal__etapa" key={etapa}>
+                        <div className={`dia-modal__etapa dia-modal__etapa--${etapa.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')}`} key={etapa}>
                             <div className="dia-modal__etapa-header" onClick={() => toggleEtapa(etapa)}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                     <h3>{etapa}</h3>

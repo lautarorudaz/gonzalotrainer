@@ -152,7 +152,7 @@ export default function MiRutina() {
     return (
         <div className="mirutina">
             <nav className="mirutina__nav">
-                <div className="mirutina__nav-brand">TRAINER<span>.</span></div>
+                <img src="/logo-light-bg.png" alt="Force Training" className="mirutina__nav-brand-img" />
                 <button className="mirutina__nav-logout" onClick={async () => {
                     const { signOut } = await import('firebase/auth');
                     const { auth } = await import('../../firebase/config');

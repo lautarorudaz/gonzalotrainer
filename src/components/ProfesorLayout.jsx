@@ -62,9 +62,7 @@ export default function ProfesorLayout({ children }) {
                         <span />
                         <span />
                     </button>
-                    <div className="profesor-topbar__brand">
-                        TRAINER<span>.</span>
-                    </div>
+                    <img src="/logo-light-bg.png" alt="Force Training" className="profesor-topbar__brand-img" />
                 </div>
 
                 {children}

@@ -26,7 +26,7 @@ export default function SidebarProfesor({ isOpen, onClose }) {
 
     return (
         <aside className={`sidebar ${isOpen ? 'sidebar--open' : ''}`}>
-            <div className="sidebar__brand">TRAINER<span>.</span></div>
+            <img src="/logo-dark-bg.png" alt="Force Training" className="sidebar__brand-img" />
             <nav className="sidebar__nav">
                 {links.map((link) => (
                     <NavLink

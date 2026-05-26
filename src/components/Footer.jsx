@@ -3,7 +3,7 @@ import './Footer.css';
 export default function Footer() {
     return (
         <footer className="footer">
-            <p>© {new Date().getFullYear()} TRAINER. Todos los derechos reservados.</p>
+            <p>© {new Date().getFullYear()} Force Training. Todos los derechos reservados.</p>
         </footer>
     );
 }

@@ -49,7 +49,7 @@ export default function Login() {
     return (
         <div className="login">
             <div className="login__card">
-                <div className="login__brand">TRAINER<span>.</span></div>
+                <img src="/logo-light-bg.png" alt="Force Training" className="login__brand-img" />
                 <h1 className="login__title">Bienvenido</h1>
                 <p className="login__subtitle">Ingresá con tu cuenta</p>
 

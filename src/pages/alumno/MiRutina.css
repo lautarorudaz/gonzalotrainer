@@ -353,14 +353,9 @@
     border-bottom: 1px solid var(--color-border);
 }
 
-.mirutina__nav-brand {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-}
-
-.mirutina__nav-brand span {
-    color: var(--color-accent-dark);
+.mirutina__nav-brand-img {
+    height: 48px;
+    object-fit: contain;
 }
 
 .mirutina__nav-logout {

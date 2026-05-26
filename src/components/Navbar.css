@@ -13,14 +13,9 @@
     border-bottom: 1px solid var(--color-border);
 }
 
-.navbar__brand {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
-
-.navbar__brand span {
-    color: var(--color-accent-dark);
+.navbar__brand-img {
+    height: 55px;
+    object-fit: contain;
 }
 
 .navbar__links {
