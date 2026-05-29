@@ -12,10 +12,10 @@ export default function Contacto() {
                     Escribime por WhatsApp o Instagram y coordino una evaluación gratuita con vos.
                 </p>
                 <div className="contacto__btns">
-                    <a href="https://wa.me/TUNUMERO" target="_blank" rel="noreferrer" className="contacto__btn contacto__btn--wa">
+                    <a href="https://wa.me/5493624528900" target="_blank" rel="noreferrer" className="contacto__btn contacto__btn--wa">
                         WhatsApp
                     </a>
-                    <a href="https://instagram.com/TUUSUARIO" target="_blank" rel="noreferrer" className="contacto__btn contacto__btn--ig">
+                    <a href="https://www.instagram.com/almmirongonza/" target="_blank" rel="noreferrer" className="contacto__btn contacto__btn--ig">
                         Instagram
                     </a>
                 </div>

@@ -5,6 +5,13 @@ import { auth, db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+const ArrowLeftIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M19 12H5" />
+        <path d="M12 5l-7 7 7 7" />
+    </svg>
+);
+
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -49,6 +56,10 @@ export default function Login() {
     return (
         <div className="login">
             <div className="login__card">
+                <button className="login__back" onClick={() => navigate('/')} aria-label="Volver al inicio">
+                    <ArrowLeftIcon />
+                    <span>Volver</span>
+                </button>
                 <img src="/logo-light-bg.png" alt="Force Training" className="login__brand-img" />
                 <h1 className="login__title">Bienvenido</h1>
                 <p className="login__subtitle">Ingresá con tu cuenta</p>

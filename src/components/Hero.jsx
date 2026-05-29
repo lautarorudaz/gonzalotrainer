@@ -17,9 +17,18 @@ export default function Hero() {
                 <a href="#contacto" className="hero__btn">Empezá hoy</a>
             </div>
             <div className="hero__image-wrap">
-                <div className="hero__image-placeholder">
-                    <span>FOTO<br />PROFESOR</span>
+                {/* Decorative background elements */}
+                <div className="hero__deco hero__deco--stripes" aria-hidden="true">
+                    <span /><span /><span /><span /><span />
                 </div>
+                <div className="hero__deco hero__deco--circle" aria-hidden="true" />
+                <div className="hero__deco hero__deco--dots" aria-hidden="true" />
+
+                <img
+                    src="/gonzasinfondo.png"
+                    alt="Gonzalo - Force Training"
+                    className="hero__img"
+                />
                 <div className="hero__tag">+ 50 alumnos activos</div>
             </div>
         </section>

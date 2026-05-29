@@ -9,11 +9,17 @@ const modalidades = ['Presencial', 'Online', 'Semipresencial'];
 export default function AlumnoModal({ alumno, onClose }) {
     const editando = !!alumno;
 
+    // El número siempre arranca con '54' y no se puede borrar
+    const PREFIJO = '54';
+    const initNumero = alumno?.numero
+        ? (alumno.numero.startsWith(PREFIJO) ? alumno.numero : PREFIJO + alumno.numero)
+        : PREFIJO;
+
     const [form, setForm] = useState({
         nombre: alumno?.nombre || '',
         apellido: alumno?.apellido || '',
         email: alumno?.email || '',
-        numero: alumno?.numero || '',
+        numero: initNumero,
         modalidad: alumno?.modalidad || '',
         password: '',
     });
@@ -22,7 +28,12 @@ export default function AlumnoModal({ alumno, onClose }) {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === 'numero') {
+            // No permitir borrar el prefijo '54'
+            if (!value.startsWith(PREFIJO)) return;
+        }
+        setForm({ ...form, [name]: value });
     };
 
     const handleSubmit = async (e) => {
@@ -97,7 +108,18 @@ export default function AlumnoModal({ alumno, onClose }) {
 
                     <div className="modal__field">
                         <label>Número de teléfono</label>
-                        <input name="numero" value={form.numero} onChange={handleChange} />
+                        <div className="modal__phone-wrap">
+                            <span className="modal__phone-prefix">+</span>
+                            <input
+                                name="numero"
+                                type="tel"
+                                value={form.numero}
+                                onChange={handleChange}
+                                placeholder="54911XXXXXXXX"
+                                className="modal__phone-input"
+                            />
+                        </div>
+                        <span className="modal__phone-hint">El prefijo +54 no se puede eliminar</span>
                     </div>
 
                     <div className="modal__field">

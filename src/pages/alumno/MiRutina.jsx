@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, updateDoc, deleteDoc, doc as fsDoc } from 'firebase/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useAuth } from '../../context/AuthContext';
@@ -30,6 +30,9 @@ export default function MiRutina() {
     const [enviandoEj, setEnviandoEj] = useState({});
     const [comentariosDelDia, setComentariosDelDia] = useState([]);
     const [ejAbierto, setEjAbierto] = useState(null);
+    // Edición de comentarios
+    const [editandoId, setEditandoId] = useState(null);
+    const [editandoTexto, setEditandoTexto] = useState('');
 
     useEffect(() => {
 
@@ -134,6 +137,23 @@ export default function MiRutina() {
         setComentarioEj(prev => ({ ...prev, [ejercicioNombre]: '' }));
         setEnviandoEj(prev => ({ ...prev, [ejercicioNombre]: false }));
         setEjAbierto(null);
+        fetchComentariosDia();
+    };
+
+    const handleEliminarComentario = async (comentarioId) => {
+        if (!window.confirm('¿Eliminar este comentario?')) return;
+        await deleteDoc(fsDoc(db, 'usuarios', user.uid, 'comentarios', comentarioId));
+        fetchComentariosDia();
+    };
+
+    const handleGuardarEdicion = async (comentarioId) => {
+        if (!editandoTexto.trim()) return;
+        await updateDoc(fsDoc(db, 'usuarios', user.uid, 'comentarios', comentarioId), {
+            texto: editandoTexto,
+            editado: true,
+        });
+        setEditandoId(null);
+        setEditandoTexto('');
         fetchComentariosDia();
     };
 
@@ -280,13 +300,46 @@ export default function MiRutina() {
                                         ? <span className="comentario-item__tag">📌 {c.ejercicioNombre}</span>
                                         : <span className="comentario-item__tag">📋 General</span>
                                     }
-                                    <span className="comentario-item__fecha">
-                                        {c.fecha?.seconds
-                                            ? new Date(c.fecha.seconds * 1000).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })
-                                            : ''}
-                                    </span>
+                                    <div className="comentario-item__right">
+                                        <span className="comentario-item__fecha">
+                                            {c.fecha?.seconds
+                                                ? new Date(c.fecha.seconds * 1000).toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })
+                                                : ''}
+                                        </span>
+                                        <button
+                                            className="comentario-item__action comentario-item__action--edit"
+                                            title="Editar"
+                                            onClick={() => { setEditandoId(c.id); setEditandoTexto(c.texto); }}
+                                        >✏️</button>
+                                        <button
+                                            className="comentario-item__action comentario-item__action--delete"
+                                            title="Eliminar"
+                                            onClick={() => handleEliminarComentario(c.id)}
+                                        >🗑️</button>
+                                    </div>
                                 </div>
-                                <p>{c.texto}</p>
+                                {editandoId === c.id ? (
+                                    <div className="comentario-item__edit-form">
+                                        <textarea
+                                            value={editandoTexto}
+                                            onChange={e => setEditandoTexto(e.target.value)}
+                                            rows={2}
+                                            autoFocus
+                                        />
+                                        <div className="comentario-item__edit-actions">
+                                            <button
+                                                className="comentario-item__edit-cancel"
+                                                onClick={() => setEditandoId(null)}
+                                            >Cancelar</button>
+                                            <button
+                                                className="comentario-item__edit-save"
+                                                onClick={() => handleGuardarEdicion(c.id)}
+                                            >Guardar</button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <p>{c.texto}{c.editado && <span className="comentario-item__editado"> (editado)</span>}</p>
+                                )}
                             </div>
                         ))}
                     </div>

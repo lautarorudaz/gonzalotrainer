@@ -7,17 +7,17 @@ export default function QuienSoy() {
         <section className="quien-soy reveal" id="quien-soy" ref={ref}>
             <div className="quien-soy__inner">
                 <div className="quien-soy__image-wrap">
-                    <div className="quien-soy__image-placeholder">
-                        <span>FOTO<br />PROFESOR</span>
-                    </div>
+                    <img
+                        src="/gonzaconfondo.jpeg"
+                        alt="Gonzalo - Force Training"
+                        className="quien-soy__img"
+                    />
                 </div>
                 <div className="quien-soy__content">
                     <p className="quien-soy__eyebrow">Sobre mí</p>
                     <h2 className="quien-soy__title">¿QUIÉN SOY?</h2>
                     <p className="quien-soy__text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Soy entrenador personal con más de X años de experiencia
-                        ayudando a personas a alcanzar sus objetivos.
+                        Me llamo Gonzalo Almirón, soy profesor de Educación Física especializado en entrenamientos personalizados.
                     </p>
                     <p className="quien-soy__text">
                         Mi enfoque combina la ciencia del entrenamiento con la
