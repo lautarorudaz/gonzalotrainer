@@ -24,6 +24,7 @@ export function diaVacio() {
 
 export function ejercicioVacio() {
     return {
+        instanciaId: crypto.randomUUID(),
         ejercicioId: '',
         nombre: '',
         series: '',

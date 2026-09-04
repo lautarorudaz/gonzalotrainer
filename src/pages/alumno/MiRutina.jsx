@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, updateDoc, deleteDoc, doc as fsDoc } from 'firebase/firestore';
+import { useState, useEffect, useCallback } from 'react';
+import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, updateDoc, deleteDoc, setDoc, doc as fsDoc } from 'firebase/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useAuth } from '../../context/AuthContext';
@@ -17,6 +17,11 @@ function getYoutubeEmbed(url) {
     return `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
 }
 
+function getRegistroPesoId(rutinaId, semana, dia, etapa, ejercicio, ejercicioIdx) {
+    const ejercicioKey = ejercicio.instanciaId || ejercicio.ejercicioId || ejercicioIdx;
+    return `${rutinaId}_${semana}_${dia}_${etapa}_${ejercicioKey}`.replaceAll('/', '-');
+}
+
 export default function MiRutina() {
     const { user } = useAuth();
     const [rutina, setRutina] = useState(null);
@@ -30,6 +35,12 @@ export default function MiRutina() {
     const [enviandoEj, setEnviandoEj] = useState({});
     const [comentariosDelDia, setComentariosDelDia] = useState([]);
     const [ejAbierto, setEjAbierto] = useState(null);
+    const [registrosPeso, setRegistrosPeso] = useState([]);
+    const [pesoDraft, setPesoDraft] = useState({});
+    const [guardandoPeso, setGuardandoPeso] = useState({});
+    const [mensajePeso, setMensajePeso] = useState({});
+    const [historialSemana, setHistorialSemana] = useState('todas');
+    const [historialDia, setHistorialDia] = useState('todos');
     // Edición de comentarios
     const [editandoId, setEditandoId] = useState(null);
     const [editandoTexto, setEditandoTexto] = useState('');
@@ -38,7 +49,8 @@ export default function MiRutina() {
 
         const fetchData = async () => {
             const alumnoDoc = await getDoc(doc(db, 'usuarios', user.uid));
-            setAlumno(alumnoDoc.data());
+            const alumnoData = alumnoDoc.data();
+            setAlumno(alumnoData);
 
             const rutinaSnap = await getDocs(collection(db, 'usuarios', user.uid, 'rutinaActiva'));
             if (!rutinaSnap.empty) {
@@ -74,6 +86,11 @@ export default function MiRutina() {
                 };
 
                 setRutina(rutinaCruzada);
+
+                if (alumnoData?.autoregistroPesos) {
+                    const pesosSnap = await getDocs(collection(db, 'usuarios', user.uid, 'registrosPeso'));
+                    setRegistrosPeso(pesosSnap.docs.map(d => ({ id: d.id, ...d.data() })));
+                }
             }
             setLoading(false);
         };
@@ -81,12 +98,7 @@ export default function MiRutina() {
 
     }, [user]);
 
-    useEffect(() => {
-        if (!rutina) return;
-        fetchComentariosDia();
-    }, [rutina, semanaIdx, diaIdx]);
-
-    const fetchComentariosDia = async () => {
+    const fetchComentariosDia = useCallback(async () => {
         const q = query(
             collection(db, 'usuarios', user.uid, 'comentarios'),
             orderBy('fecha', 'desc')
@@ -97,7 +109,14 @@ export default function MiRutina() {
             c.semana === semanaIdx && c.dia === diaIdx
         );
         setComentariosDelDia(filtrados);
-    };
+    }, [user.uid, semanaIdx, diaIdx]);
+
+    useEffect(() => {
+        if (!rutina) return;
+        // La carga es asíncrona y sincroniza los comentarios con la selección actual.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        fetchComentariosDia();
+    }, [rutina, fetchComentariosDia]);
 
     const handleComentarioDia = async () => {
         if (!comentarioDia.trim()) return;
@@ -157,6 +176,47 @@ export default function MiRutina() {
         fetchComentariosDia();
     };
 
+    const handleGuardarPeso = async (etapa, ejercicio, ejercicioIdx) => {
+        const registroId = getRegistroPesoId(rutina.id, semanaIdx, diaIdx, etapa, ejercicio, ejercicioIdx);
+        const registroActual = registrosPeso.find(r => r.id === registroId);
+        const peso = Number(String(pesoDraft[registroId] ?? registroActual?.peso ?? '').replace(',', '.'));
+
+        if (!Number.isFinite(peso) || peso <= 0) {
+            setMensajePeso(prev => ({ ...prev, [registroId]: 'Ingresá un peso mayor a 0.' }));
+            return;
+        }
+
+        setGuardandoPeso(prev => ({ ...prev, [registroId]: true }));
+        const registro = {
+            rutinaId: rutina.id,
+            rutinaNombre: rutina.nombre,
+            semana: semanaIdx,
+            dia: diaIdx,
+            diaNombre: rutina.semanas?.[semanaIdx]?.dias?.[diaIdx]?.nombre || `Día ${diaIdx + 1}`,
+            etapa,
+            ejercicioId: ejercicio.ejercicioId || '',
+            instanciaId: ejercicio.instanciaId || '',
+            ejercicioNombre: ejercicio.nombre,
+            ejercicioIdx,
+            peso,
+            fechaActualizacion: serverTimestamp(),
+        };
+
+        try {
+            await setDoc(fsDoc(db, 'usuarios', user.uid, 'registrosPeso', registroId), registro, { merge: true });
+            setRegistrosPeso(prev => [
+                ...prev.filter(r => r.id !== registroId),
+                { id: registroId, ...registro, fechaActualizacion: new Date() },
+            ]);
+            setPesoDraft(prev => ({ ...prev, [registroId]: String(peso) }));
+            setMensajePeso(prev => ({ ...prev, [registroId]: 'Peso guardado.' }));
+        } catch {
+            setMensajePeso(prev => ({ ...prev, [registroId]: 'No se pudo guardar. Intentá de nuevo.' }));
+        } finally {
+            setGuardandoPeso(prev => ({ ...prev, [registroId]: false }));
+        }
+    };
+
     if (loading) return <div className="mirutina__loading">Cargando tu rutina...</div>;
 
     if (!rutina) return (
@@ -168,6 +228,35 @@ export default function MiRutina() {
 
     const semana = rutina.semanas?.[semanaIdx];
     const dia = semana?.dias?.[diaIdx];
+    const diasHistorial = Array.from(new Map(
+        rutina.semanas.flatMap(sem => (sem.dias || []).map((item, idx) => [
+            idx,
+            item.nombre || `Día ${idx + 1}`,
+        ]))
+    ), ([indice, nombre]) => ({ indice, nombre }));
+
+    const registrosPesoFiltrados = registrosPeso
+        .filter(registro => registro.rutinaId === rutina.id)
+        .filter(registro => historialSemana === 'todas' || registro.semana === Number(historialSemana))
+        .filter(registro => historialDia === 'todos' || registro.dia === Number(historialDia))
+        .sort((a, b) => b.semana - a.semana || b.dia - a.dia || a.ejercicioNombre.localeCompare(b.ejercicioNombre));
+
+    const ejerciciosHistorial = Array.from(new Map(
+        registrosPesoFiltrados.map((registro, idx) => [
+            registro.ejercicioId || registro.ejercicioNombre,
+            {
+                etapa: registro.etapa,
+                ejercicio: { ejercicioId: registro.ejercicioId, nombre: registro.ejercicioNombre },
+                ejercicioIdx: idx,
+            },
+        ])
+    ).values());
+
+    const getHistorialEjercicio = (ejercicio) => registrosPesoFiltrados.filter(registro => (
+        ejercicio.ejercicioId
+            ? registro.ejercicioId === ejercicio.ejercicioId
+            : registro.ejercicioNombre === ejercicio.nombre
+    ));
 
     return (
         <div className="mirutina">
@@ -254,6 +343,52 @@ export default function MiRutina() {
                                                 {ej.aclaracion && (
                                                     <p className="ej-card__aclaracion">💬 {ej.aclaracion}</p>
                                                 )}
+                                                {alumno?.autoregistroPesos && (() => {
+                                                    const registroId = getRegistroPesoId(rutina.id, semanaIdx, diaIdx, etapa, ej, ei);
+                                                    const registro = registrosPeso.find(r => r.id === registroId);
+                                                    const valor = pesoDraft[registroId] ?? registro?.peso ?? '';
+                                                    return (
+                                                        <div className="ej-card__peso-personal">
+                                                            <div className="ej-card__peso-header">
+                                                                <div>
+                                                                    <span className="ej-card__peso-label">Mi peso realizado</span>
+                                                                    <small>Semana {semanaIdx + 1} · {dia?.nombre || `Día ${diaIdx + 1}`}</small>
+                                                                </div>
+                                                                {registro && <span className="ej-card__peso-guardado">Guardado</span>}
+                                                            </div>
+                                                            <div className="ej-card__peso-form">
+                                                                <div className="ej-card__peso-input-wrap">
+                                                                    <input
+                                                                        type="number"
+                                                                        min="0.1"
+                                                                        step="0.1"
+                                                                        inputMode="decimal"
+                                                                        aria-label={`Peso realizado en ${ej.nombre}`}
+                                                                        value={valor}
+                                                                        onChange={e => {
+                                                                            setPesoDraft(prev => ({ ...prev, [registroId]: e.target.value }));
+                                                                            setMensajePeso(prev => ({ ...prev, [registroId]: '' }));
+                                                                        }}
+                                                                        placeholder="0"
+                                                                    />
+                                                                    <span>kg</span>
+                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => handleGuardarPeso(etapa, ej, ei)}
+                                                                    disabled={guardandoPeso[registroId]}
+                                                                >
+                                                                    {guardandoPeso[registroId] ? 'Guardando...' : registro ? 'Actualizar' : 'Guardar'}
+                                                                </button>
+                                                            </div>
+                                                            {mensajePeso[registroId] && (
+                                                                <p className={`ej-card__peso-mensaje${mensajePeso[registroId] === 'Peso guardado.' ? ' is-success' : ''}`}>
+                                                                    {mensajePeso[registroId]}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
                                                 <button
                                                     className="ej-card__comentar-btn"
                                                     onClick={() => setEjAbierto(ejAbierto === ejKey ? null : ejKey)}
@@ -288,6 +423,61 @@ export default function MiRutina() {
             </div>
 
             {/* Comentarios del día */}
+            {alumno?.autoregistroPesos && (
+                <section className="mirutina__historial-pesos">
+                    <div className="mirutina__historial-header">
+                        <p>Progreso personal</p>
+                        <h2>Mi historial de cargas</h2>
+                        <span>Consultá los pesos que registraste en cada semana.</span>
+                    </div>
+                    <div className="mirutina__historial-filtros">
+                        <label>
+                            <span>Semana</span>
+                            <select value={historialSemana} onChange={e => setHistorialSemana(e.target.value)}>
+                                <option value="todas">Todas las semanas</option>
+                                {rutina.semanas.map((_, idx) => (
+                                    <option value={idx} key={idx}>Semana {idx + 1}</option>
+                                ))}
+                            </select>
+                        </label>
+                        <label>
+                            <span>Día</span>
+                            <select value={historialDia} onChange={e => setHistorialDia(e.target.value)}>
+                                <option value="todos">Todos los días</option>
+                                {diasHistorial.map(item => (
+                                    <option value={item.indice} key={item.indice}>{item.nombre}</option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
+                    {registrosPesoFiltrados.length === 0 && (
+                        <div className="mirutina__historial-vacio">No hay pesos guardados para esta selección.</div>
+                    )}
+                    <div className="mirutina__historial-grid">
+                        {ejerciciosHistorial.map(({ etapa, ejercicio, ejercicioIdx }) => {
+                            const historial = getHistorialEjercicio(ejercicio);
+                            return (
+                                <article className="historial-peso-card" key={`${etapa}-${ejercicioIdx}`}>
+                                    <h3>{ejercicio.nombre}</h3>
+                                    {historial.length === 0 ? (
+                                        <p className="historial-peso-card__empty">Todavía no registraste pesos.</p>
+                                    ) : (
+                                        <div className="historial-peso-card__lista">
+                                            {historial.map(registro => (
+                                                <div className="historial-peso-card__fila" key={registro.id}>
+                                                    <span>Semana {registro.semana + 1} · {registro.diaNombre || `Día ${registro.dia + 1}`}</span>
+                                                    <strong>{registro.peso} kg</strong>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </article>
+                            );
+                        })}
+                    </div>
+                </section>
+            )}
+
             <div className="mirutina__comentarios">
                 <h2 className="mirutina__comentarios-titulo">Comentarios del día</h2>
 

@@ -21,6 +21,7 @@ export default function AlumnoModal({ alumno, onClose }) {
         email: alumno?.email || '',
         numero: initNumero,
         modalidad: alumno?.modalidad || '',
+        autoregistroPesos: alumno?.autoregistroPesos || false,
         password: '',
     });
     const [showPass, setShowPass] = useState(false);
@@ -28,12 +29,12 @@ export default function AlumnoModal({ alumno, onClose }) {
     const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         if (name === 'numero') {
             // No permitir borrar el prefijo '54'
             if (!value.startsWith(PREFIJO)) return;
         }
-        setForm({ ...form, [name]: value });
+        setForm({ ...form, [name]: type === 'checkbox' ? checked : value });
     };
 
     const handleSubmit = async (e) => {
@@ -48,6 +49,7 @@ export default function AlumnoModal({ alumno, onClose }) {
                     apellido: form.apellido,
                     numero: form.numero,
                     modalidad: form.modalidad,
+                    autoregistroPesos: form.autoregistroPesos,
                 });
             } else {
                 const cred = await createUserWithEmailAndPassword(secondaryAuth, form.email, form.password);
@@ -58,6 +60,7 @@ export default function AlumnoModal({ alumno, onClose }) {
                     numero: form.numero,
                     modalidad: form.modalidad,
                     rol: 'alumno',
+                    autoregistroPesos: form.autoregistroPesos,
                 });
                 // Cerrar sesión de la instancia secundaria para no afectar al profesor
                 await signOut(secondaryAuth);
@@ -131,6 +134,19 @@ export default function AlumnoModal({ alumno, onClose }) {
                             ))}
                         </select>
                     </div>
+
+                    <label className="modal__toggle">
+                        <input
+                            name="autoregistroPesos"
+                            type="checkbox"
+                            checked={form.autoregistroPesos}
+                            onChange={handleChange}
+                        />
+                        <span>
+                            <strong>Registro personal de cargas</strong>
+                            <small>Permite que el alumno guarde sus pesos por semana y ejercicio.</small>
+                        </span>
+                    </label>
 
                     {!editando && (
                         <div className="modal__field">

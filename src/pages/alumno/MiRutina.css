@@ -461,3 +461,271 @@
 .mirutina__nav-logout:hover {
     border-color: var(--color-dark);
 }
+
+.ej-card__peso-personal {
+    margin: 1rem 0;
+    padding: 0.9rem;
+    border: 1px solid rgba(166, 219, 32, 0.55);
+    border-radius: 12px;
+    background: rgba(199, 244, 61, 0.08);
+}
+
+.ej-card__peso-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.7rem;
+}
+
+.ej-card__peso-header > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.ej-card__peso-label {
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.ej-card__peso-header small {
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+}
+
+.ej-card__peso-guardado {
+    color: #52720a;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ej-card__peso-form {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.ej-card__peso-input-wrap {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    overflow: hidden;
+}
+
+.ej-card__peso-input-wrap:focus-within {
+    border-color: var(--color-accent-dark);
+}
+
+.ej-card__peso-input-wrap input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    font-weight: 700;
+}
+
+.ej-card__peso-input-wrap span {
+    padding-right: 0.75rem;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.ej-card__peso-form > button {
+    border: 0;
+    border-radius: 10px;
+    padding: 0.65rem 1rem;
+    background: var(--color-dark);
+    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.ej-card__peso-form > button:hover:not(:disabled) {
+    background: var(--color-accent-dark);
+    color: var(--color-dark);
+}
+
+.ej-card__peso-form > button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+.ej-card__peso-mensaje {
+    margin-top: 0.45rem;
+    color: #b42318;
+    font-size: 0.74rem;
+}
+
+.ej-card__peso-mensaje.is-success {
+    color: #52720a;
+}
+
+.mirutina__historial-pesos {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: var(--color-dark);
+    color: #fff;
+}
+
+.mirutina__historial-header {
+    margin-bottom: 1.25rem;
+}
+
+.mirutina__historial-header p {
+    margin-bottom: 0.25rem;
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.mirutina__historial-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+}
+
+.mirutina__historial-header span {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.82rem;
+}
+
+.mirutina__historial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.85rem;
+}
+
+.historial-peso-card {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.historial-peso-card h3 {
+    margin-bottom: 0.7rem;
+    font-size: 0.92rem;
+}
+
+.historial-peso-card__empty {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.78rem;
+}
+
+.historial-peso-card__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.historial-peso-card__fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.76rem;
+}
+
+.historial-peso-card__fila strong {
+    color: var(--color-accent);
+    white-space: nowrap;
+}
+
+.mirutina__historial-filtros {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding: 0.85rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.mirutina__historial-filtros label {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.mirutina__historial-filtros label > span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.mirutina__historial-filtros select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 9px;
+    background: #292929;
+    color: #fff;
+    font: inherit;
+    font-size: 0.82rem;
+}
+
+.mirutina__historial-vacio {
+    padding: 1.5rem;
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.58);
+    text-align: center;
+    font-size: 0.82rem;
+}
+
+.mirutina__historial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.historial-peso-card {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.8fr) 1.2fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0.25rem;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0;
+    background: transparent;
+}
+
+.historial-peso-card:first-child {
+    border-top: 0;
+}
+
+.historial-peso-card h3 {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .mirutina__historial-pesos {
+        padding: 1.25rem;
+    }
+
+    .mirutina__historial-filtros {
+        flex-direction: column;
+    }
+
+    .historial-peso-card {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+}
