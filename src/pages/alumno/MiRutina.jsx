@@ -3,6 +3,7 @@ import { collection, getDocs, addDoc, serverTimestamp, query, orderBy, updateDoc
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useAuth } from '../../context/AuthContext';
+import { exportarRutinaPdf } from '../../utils/exportarRutinaPdf';
 import './MiRutina.css';
 
 const ETAPAS = ['Movilidad', 'Activación', 'Central'];
@@ -39,6 +40,7 @@ export default function MiRutina() {
     const [pesoDraft, setPesoDraft] = useState({});
     const [guardandoPeso, setGuardandoPeso] = useState({});
     const [mensajePeso, setMensajePeso] = useState({});
+    const [exportandoPdf, setExportandoPdf] = useState(false);
     const [historialSemana, setHistorialSemana] = useState('todas');
     const [historialDia, setHistorialDia] = useState('todos');
     // Edición de comentarios
@@ -87,7 +89,7 @@ export default function MiRutina() {
 
                 setRutina(rutinaCruzada);
 
-                if (alumnoData?.autoregistroPesos) {
+                if (alumnoData?.autoregistroPesos !== false) {
                     const pesosSnap = await getDocs(collection(db, 'usuarios', user.uid, 'registrosPeso'));
                     setRegistrosPeso(pesosSnap.docs.map(d => ({ id: d.id, ...d.data() })));
                 }
@@ -277,6 +279,21 @@ export default function MiRutina() {
                     <p className="mirutina__saludo">Bienvenido, <strong>{alumno?.nombre}</strong></p>
                     <h1 className="mirutina__titulo">{rutina.nombre}</h1>
                 </div>
+                <button
+                    className="mirutina__exportar"
+                    type="button"
+                    disabled={exportandoPdf}
+                    onClick={async () => {
+                        setExportandoPdf(true);
+                        try {
+                            await exportarRutinaPdf(rutina, alumno);
+                        } finally {
+                            setExportandoPdf(false);
+                        }
+                    }}
+                >
+                    {exportandoPdf ? 'Generando PDF...' : 'Exportar rutina en PDF'}
+                </button>
             </div>
 
             {/* Selectores */}
@@ -343,7 +360,7 @@ export default function MiRutina() {
                                                 {ej.aclaracion && (
                                                     <p className="ej-card__aclaracion">💬 {ej.aclaracion}</p>
                                                 )}
-                                                {alumno?.autoregistroPesos && (() => {
+                                                {alumno?.autoregistroPesos !== false && (() => {
                                                     const registroId = getRegistroPesoId(rutina.id, semanaIdx, diaIdx, etapa, ej, ei);
                                                     const registro = registrosPeso.find(r => r.id === registroId);
                                                     const valor = pesoDraft[registroId] ?? registro?.peso ?? '';
@@ -423,7 +440,7 @@ export default function MiRutina() {
             </div>
 
             {/* Comentarios del día */}
-            {alumno?.autoregistroPesos && (
+            {alumno?.autoregistroPesos !== false && (
                 <section className="mirutina__historial-pesos">
                     <div className="mirutina__historial-header">
                         <p>Progreso personal</p>

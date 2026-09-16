@@ -142,7 +142,7 @@ export default function DiaModal({ dia, diaIdx, ejerciciosBanco, onGuardar, onCl
                                                         </div>
                                                         <div className="ej-campo">
                                                             <label>Reps</label>
-                                                            <input type="number" value={ej.repeticiones} placeholder="12"
+                                                            <input type="text" value={ej.repeticiones} placeholder="10 - 10 - 8 - 6 - 6"
                                                                 onChange={e => updateEjercicio(etapa, ei, 'repeticiones', e.target.value)} />
                                                         </div>
                                                         <div className="ej-campo">

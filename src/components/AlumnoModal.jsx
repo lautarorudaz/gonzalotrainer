@@ -21,7 +21,9 @@ export default function AlumnoModal({ alumno, onClose }) {
         email: alumno?.email || '',
         numero: initNumero,
         modalidad: alumno?.modalidad || '',
-        autoregistroPesos: alumno?.autoregistroPesos || false,
+        // Los alumnos creados antes de esta función no tienen el campo.
+        // En ese caso el registro de cargas queda habilitado por defecto.
+        autoregistroPesos: alumno?.autoregistroPesos ?? true,
         password: '',
     });
     const [showPass, setShowPass] = useState(false);
